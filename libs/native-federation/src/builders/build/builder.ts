@@ -116,7 +116,10 @@ export async function* runBuilder(
 
   setLogLevel(options.verbose ? 'verbose' : 'info');
 
-  const outputPath = path.join(options.outputPath, 'browser');
+  const outputPath =
+    typeof options.outputPath === 'string'
+      ? path.join(options.outputPath, 'browser')
+      : path.join(options.outputPath.base, options.outputPath.browser);
 
   const fedOptions: FederationOptions = {
     workspaceRoot: context.workspaceRoot,
@@ -241,7 +244,13 @@ export async function* runBuilder(
     }
 
     if (first && runServer) {
-      startServer(nfOptions, options.outputPath, memResults);
+      startServer(
+        nfOptions,
+        typeof options.outputPath === 'string'
+          ? options.outputPath
+          : options.outputPath.base,
+        memResults
+      );
     }
 
     if (!first && runServer) {
