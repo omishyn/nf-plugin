@@ -1,0 +1,47 @@
+{
+  "name": "native-federation-core",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/native-federation-core/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/native-federation-core",
+        "main": "libs/native-federation-core/src/index.ts",
+        "tsConfig": "libs/native-federation-core/tsconfig.lib.json",
+        "assets": [
+          "libs/native-federation-core/*.md",
+          "libs/native-federation-core/LICENSE"
+        ]
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/publish.mjs native-federation-core {args.ver} {args.tag}"
+      },
+      "dependsOn": [
+        {
+          "target": "build"
+        }
+      ]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/native-federation-core/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/native-federation-core"],
+      "options": {
+        "jestConfig": "libs/native-federation-core/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
