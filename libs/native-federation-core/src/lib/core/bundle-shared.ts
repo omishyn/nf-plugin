@@ -69,7 +69,7 @@ export async function bundleShared(
       external: externals,
       outdir: cachePath,
       mappedPaths: config.sharedMappings,
-      dev: fedOptions.dev,
+      dev: fedOptions.dev || fedOptions.develop,
       kind: 'shared-package',
       hash: false,
     });
