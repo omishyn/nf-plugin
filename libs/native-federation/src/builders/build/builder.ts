@@ -129,6 +129,7 @@ export async function* runBuilder(
     verbose: options.verbose,
     watch: false, // options.watch,
     dev: !!nfOptions.dev,
+    develop: !!nfOptions.develop,
   };
 
   const config = await loadFederationConfig(fedOptions);

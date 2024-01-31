@@ -34,7 +34,7 @@ export async function bundleShared(
     const encName = pi.packageName.replace(/[^A-Za-z0-9]/g, '_');
     const encVersion = pi.version.replace(/[^A-Za-z0-9]/g, '_');
 
-    const outName = fedOptions.dev
+    const outName = fedOptions.dev || fedOptions.develop
       ? `${encName}-${encVersion}-dev.js`
       : `${encName}-${encVersion}.js`;
 
