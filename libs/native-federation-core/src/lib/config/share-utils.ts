@@ -11,7 +11,6 @@ import {
 } from '../core/default-skip-list';
 import {
   findDepPackageJson,
-  findPackageJsonFiles,
   getVersionMaps,
   VersionMap,
 } from '../utils/package-info';
@@ -62,7 +61,7 @@ function findPackageJson(folder: string): string {
 
   throw new Error(
     'no package.json found. Searched the following folder and all parents: ' +
-    folder
+      folder
   );
 }
 

@@ -36,7 +36,7 @@ export async function bundleShared(
 
     const outName =
       fedOptions.dev || fedOptions.develop
-        ? `${encName}-${encVersion}-dev.js`
+        ? `${encName}-${encVersion}.js`
         : `${encName}-${encVersion}.js`;
 
     return { fileName: pi.entryPoint, outName };
