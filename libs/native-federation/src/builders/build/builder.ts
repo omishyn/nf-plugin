@@ -208,7 +208,7 @@ export async function* runBuilder(
         normOuterOptions,
         appBuilderName,
         context,
-        {
+        nfOptions.skipHtmlTransform ? {} : {
           indexHtml: transformIndexHtml,
         },
         {
@@ -240,7 +240,7 @@ export async function* runBuilder(
       );
     }
 
-    if (write && !nfOptions.dev) {
+    if (write && !nfOptions.dev && !nfOptions.skipHtmlTransform) {
       updateIndexHtml(fedOptions);
     }
 
@@ -262,7 +262,7 @@ export async function* runBuilder(
       yield output;
     }
 
-    if (!first && watch) {
+    if (!first && nfOptions.dev) {
       setTimeout(async () => {
         // logger.info('Rebuilding federation artefacts ...');
         // await Promise.all([rebuildEvents.rebuild.emit()]);
